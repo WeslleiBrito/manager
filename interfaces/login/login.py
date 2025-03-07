@@ -1,29 +1,21 @@
 from PySide6.QtWidgets import (
     QApplication,
     QWidget,
-    QGridLayout,
     QVBoxLayout,
     QHBoxLayout,
     QLabel,
     QComboBox,
     QLineEdit,
-    QPushButton
+    QPushButton,
+    QFrame,
+    QSpacerItem,
+    QSizePolicy,
 )
-
-from PySide6.QtGui import (
-    Qt,
-    QPixmap,
-    QImage
-)
-
-from PySide6.QtCore import (
-    QSize,
-    QTimer,
-    QEvent
-)
-
+from PySide6.QtGui import Qt, QPixmap, QImage
+from PySide6.QtCore import QSize, QTimer
 from pathlib import Path
 import sys
+
 
 class Login(QWidget):
     def __init__(self):
@@ -34,85 +26,87 @@ class Login(QWidget):
 
         # Configurando a janela
         self.setWindowTitle("Login")
-        self.resize(QSize(460, 280))
+        self.resize(QSize(400, 200))  # Mantendo o tamanho original da janela
 
         # Centraliza a janela após um pequeno delay
         QTimer.singleShot(500, self.center)
 
-        # Definindo os containers
-        main_container = QGridLayout()
-        user_container = QVBoxLayout()
-        logo_container = QVBoxLayout()
-        button_container = QHBoxLayout()
-        input_container_user = QVBoxLayout()
-        input_container_password = QVBoxLayout()
+        # Definindo o layout principal
+        main_layout = QHBoxLayout()  # Layout horizontal para dividir a janela
 
-        # Definindo os widgets
-        user_widget = QWidget()
+        # Layout para os campos de entrada e botões (lado esquerdo)
+        left_layout = QVBoxLayout()
+
+        # Layout de usuário e senha
+        input_layout = QVBoxLayout()
         label_user = QLabel("Usuário")
         self.combo_users = QComboBox()
         self.combo_users.addItems(["Wesllei", "Usuário 02"])
+        self.combo_users.setMaximumWidth(200)  # Reduzindo a largura do combobox
         label_password = QLabel("Senha")
         self.line_text_password = QLineEdit()
         self.line_text_password.setEchoMode(QLineEdit.EchoMode.Password)
-        image_logo = QLabel()
+        self.line_text_password.setMaximumWidth(200)  # Reduzindo a largura do campo de senha
 
-        # Carregando a imagem da logo
-        logo_path = path_local / "../../src/logo.png"
-        if not logo_path.exists():
-            print(f"Erro: A imagem {logo_path} não foi encontrada.")
-            sys.exit(1)
+        # Adicionando widgets de input ao layout
+        input_layout.addWidget(label_user)
+        input_layout.addWidget(self.combo_users)
+        input_layout.addWidget(label_password)
+        input_layout.addWidget(self.line_text_password)
 
-        img = QImage(str(logo_path)).scaled(
-            200,
-            200,
-            Qt.AspectRatioMode.KeepAspectRatio,
-            Qt.TransformationMode.SmoothTransformation
-        )
-        image_logo.setPixmap(QPixmap.fromImage(img))
-        image_logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
+        # Layout de botões
+        button_layout = QHBoxLayout()
         button_enter = QPushButton("Entrar")
         button_exit = QPushButton("Sair")
+        button_enter.setMaximumWidth(90)  # Reduzindo a largura dos botões
+        button_exit.setMaximumWidth(60)
+        button_layout.addWidget(button_enter)
+        button_layout.addWidget(button_exit)
 
         # Conectando os botões aos métodos
         button_enter.clicked.connect(self.on_enter_clicked)
         button_exit.clicked.connect(self.on_exit_clicked)
 
-        user_widget.setLayout(user_container)
+        # Adicionando os layouts de input e botões ao layout esquerdo
+        left_layout.addLayout(input_layout)
+        left_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
+        left_layout.addLayout(button_layout)
 
-        # Estilizando o container do usuário
-        user_container.setSpacing(0)
-        user_container.setContentsMargins(0, 0, 0, 0)
-        self.combo_users.setMinimumSize(100, 20)
-        self.line_text_password.setMinimumSize(100, 20)
+        # Adicionando um espaçador para empurrar os componentes para cima
+        left_layout.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
 
-        # Estilizando os Botões
-        button_enter.setMinimumSize(100, 20)
-        button_exit.setMinimumSize(100, 20)
+        # Frame de logo (lado direito)
+        logo_frame = QFrame()
+        logo_layout = QVBoxLayout(logo_frame)
 
-        # Adicionando os widgets aos seus respectivos containers
-        input_container_user.addWidget(label_user)
-        input_container_user.addWidget(self.combo_users)
-        input_container_password.addWidget(label_password)
-        input_container_password.addWidget(self.line_text_password)
+        # Carregando a imagem da logo
+        logo_path = path_local / "../../src/logo.png"
 
-        user_container.addLayout(input_container_user)
-        user_container.addLayout(input_container_password)
-        logo_container.addWidget(image_logo)
-        button_container.addWidget(button_enter)
-        button_container.addWidget(button_exit)
+        if not logo_path.exists():
+            print(f"Erro: A imagem {logo_path} não foi encontrada.")
+            sys.exit(1)
 
-        # Estilizando o container principal
-        main_container.setColumnStretch(0, 2)
-        main_container.setColumnStretch(1, 2)
+        img = QImage(str(logo_path)).scaled(
+            150,
+            150,
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
+        )
+        image_logo = QLabel()
+        image_logo.setPixmap(QPixmap.fromImage(img))
+        image_logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        # Adicionando os containers auxiliares ao container principal
-        main_container.addWidget(user_widget, 0, 0, Qt.AlignmentFlag.AlignTop)
-        main_container.addLayout(logo_container, 0, 1)
-        main_container.addLayout(button_container, 1, 1)
+        # Adicionando espaçadores acima e abaixo da logo para centralizá-la verticalmente
+        logo_layout.addWidget(image_logo)
+        logo_layout.addSpacerItem(QSpacerItem(0, 40))
 
-        self.setLayout(main_container)
+
+        # Adicionando os layouts esquerdo e direito ao layout principal
+        main_layout.addLayout(left_layout)
+        main_layout.addWidget(logo_frame)
+
+        # Definindo o layout da janela
+        self.setLayout(main_layout)
 
     def center(self):
         """Centraliza a janela na tela."""
@@ -146,6 +140,7 @@ class Login(QWidget):
 
     def on_exit_clicked(self):
         self.close()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
