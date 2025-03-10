@@ -14,6 +14,8 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import Qt, QPixmap, QImage
 from PySide6.QtCore import QSize, QTimer
 from pathlib import Path
+from interfaces.home.home import Home
+
 import sys
 
 
@@ -26,10 +28,8 @@ class Login(QWidget):
 
         # Configurando a janela
         self.setWindowTitle("Login")
-        self.resize(QSize(400, 200))  # Mantendo o tamanho original da janela
+        self.resize(QSize(400, 200))  # Nintendo o tamanho original da janela
 
-        # Centraliza a janela após um pequeno delay
-        QTimer.singleShot(500, self.center)
 
         # Definindo o layout principal
         main_layout = QHBoxLayout()  # Layout horizontal para dividir a janela
@@ -108,39 +108,26 @@ class Login(QWidget):
         # Definindo o layout da janela
         self.setLayout(main_layout)
 
-    def center(self):
-        """Centraliza a janela na tela."""
-        # Força a atualização da janela
-        self.update()
-        self.repaint()
-
-        # Obtém a geometria da tela principal
-        screen_geometry = QApplication.primaryScreen().geometry()
-
-        # Calcula o centro da tela
-        center_point = screen_geometry.center()
-
-        # Obtém a geometria da janela
-        window_geometry = self.frameGeometry()
-
-        # Move a janela para o centro da tela
-        window_geometry.moveCenter(center_point)
-        self.move(window_geometry.topLeft())
 
     def showEvent(self, event):
         """Centraliza a janela após ser exibida."""
         super().showEvent(event)
-        self.center()
 
     def on_enter_clicked(self):
         user = self.combo_users.currentText()
         password = self.line_text_password.text()
         print(f"Usuário: {user}, Senha: {password}")
         # Adicione a lógica de autenticação aqui
+        self.open_home()
 
     def on_exit_clicked(self):
         self.close()
 
+
+    def open_home(self):
+        self.window_home = Home()
+        self.window_home.show()
+        self.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
