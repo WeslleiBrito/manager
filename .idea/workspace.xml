@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cf0f62f-a709-4525-9c86-e86c4bf4a7fe" name="Changes" comment="Estilização 90%">
-      <change afterPath="$PROJECT_DIR$/interfaces/home/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/home/home.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/dashboard/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/filters/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/graphics/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interfaces/lists/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interfaces/login/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/login/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/home/home.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,18 +28,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "WeslleiBrito"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;WeslleiBrito&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/WeslleiBrito/manager.git",
-    "accountId": "b65b1fd4-54b4-47ae-8107-a65a777f40e2"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/WeslleiBrito/manager.git&quot;,
+    &quot;accountId&quot;: &quot;b65b1fd4-54b4-47ae-8107-a65a777f40e2&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -48,16 +51,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.home.executor": "Run",
-    "Python.login.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.home.executor&quot;: &quot;Run&quot;,
+    &quot;Python.login.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Python.login">
+}</component>
+  <component name="RunManager" selected="Python.home">
     <configuration name="home" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Manager" />
       <option name="ENV_FILES" value="" />
@@ -104,8 +107,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.login" />
         <item itemvalue="Python.home" />
+        <item itemvalue="Python.login" />
       </list>
     </recent_temporary>
   </component>
@@ -135,6 +138,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Estilização 90%" />
