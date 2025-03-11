@@ -28,6 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
@@ -40,6 +41,20 @@
     &quot;accountId&quot;: &quot;b65b1fd4-54b4-47ae-8107-a65a777f40e2&quot;
   }
 }</component>
+
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "WeslleiBrito"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/WeslleiBrito/manager.git",
+    "accountId": "a8238ea0-244d-4acc-80e0-8df8a86ea315"
+  }
+}]]></component>
+
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -115,7 +130,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-14705d77f0bb-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.25659.43" />
+        <option value="bundled-python-sdk-98f27166c754-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.21829.153" />
       </set>
     </attachedChunks>
   </component>
@@ -144,12 +159,29 @@
       <map>
         <entry key="MAIN">
           <value>
+
             <State />
+
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+
           </value>
         </entry>
       </map>
     </option>
   </component>
+
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Estilização 90%" />
     <option name="LAST_COMMIT_MESSAGE" value="Estilização 90%" />
