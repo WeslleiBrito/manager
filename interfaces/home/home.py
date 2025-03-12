@@ -18,6 +18,8 @@ class Home(QWidget):
             "../../src/icons/home-black.svg",
             "../../src/icons/menu.png",
             "../../src/icons/menu-2.png",
+            "../../src/icons/report_black.png",
+            "../../src/icons/report_white.png",
         ]
 
         self.path_icons = {}
@@ -40,6 +42,8 @@ class Home(QWidget):
                 key_name.append(char_item)
 
             self.path_icons["".join(key_name)] = path_local / path
+
+        self.name_icon_current = "home_white"
 
         self.showMaximized()
         self.expanded = True
@@ -80,19 +84,19 @@ class Home(QWidget):
         self.btn_dashboard.setFixedSize(40, 40)
         self.btn_dashboard.clicked.connect(lambda: self.switch_page(0))
 
-        self.btn_graficos = QPushButton("Gráficos")
-        self.btn_graficos.clicked.connect(lambda: self.switch_page(1))
+        self.btn_report = QPushButton()
+        self.btn_report.setIcon(QIcon(str(self.path_icons["report_black"])))
+        self.btn_report.setIconSize(QSize(30, 30))
+        self.btn_report.setFixedSize(40, 40)
+        self.btn_report.clicked.connect(lambda: self.switch_page(1))
 
-        self.btn_lista = QPushButton("Lista")
-        self.btn_lista.clicked.connect(lambda: self.switch_page(2))
 
         # Layout da sidebar
         self.sidebar_layout = QVBoxLayout(self.sidebar)
         self.sidebar_layout.setContentsMargins(0, 40, 0, 0)
         self.sidebar_layout.addWidget(self.toggle_button, alignment=Qt.AlignmentFlag.AlignCenter)
         self.sidebar_layout.addWidget(self.btn_dashboard, alignment=Qt.AlignmentFlag.AlignCenter)
-        self.sidebar_layout.addWidget(self.btn_graficos)
-        self.sidebar_layout.addWidget(self.btn_lista)
+        self.sidebar_layout.addWidget(self.btn_report, alignment=Qt.AlignmentFlag.AlignCenter)
         self.sidebar_layout.addStretch()
 
         # 🔹 Adiciona espaçador antes da sidebar dentro do container
@@ -146,40 +150,42 @@ class Home(QWidget):
         self.pages.setCurrentIndex(index)
 
         # Reseta o estilo de todos os botões
-        self.reset_buttons_style()
+        self.reset_buttons_style(index)
 
         # Aplica o estilo ao botão selecionado
         if index == 0:
-            self.update_button_style(self.btn_dashboard)
+            self.update_button_style(self.btn_dashboard, "home_black")
+            self.btn_report.setIcon(QIcon(str(self.path_icons["report_white"])))
         elif index == 1:
-            self.update_button_style(self.btn_graficos)
-        elif index == 2:
-            self.update_button_style(self.btn_lista)
+            self.update_button_style(self.btn_report, "report_black")
+            self.btn_dashboard.setIcon(QIcon(str(self.path_icons["home_white"])))
 
-    def update_button_style(self, button):
+
+    def update_button_style(self, button, name_icon: str):
         """Atualiza o estilo do botão clicado."""
+        button.setIcon(QIcon(str(self.path_icons[name_icon])))
         button.setStyleSheet("""
-            background-color: #41AEF2;
-            color: #FFFFFF;
-            font-size: 18px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        """)
-        # Atualiza o ícone (por exemplo)
-        button.setIcon(QIcon(str(self.path_icons["home_black"])))
-
-    def reset_buttons_style(self):
-        """Reseta o estilo de todos os botões."""
-        buttons = [self.btn_dashboard, self.btn_graficos, self.btn_lista]
-        for button in buttons:
-            button.setStyleSheet("""
-                background-color: transparent;
-                color: #000000;
+                background-color: #41AEF2;
+                color: #FFFFFF;
                 font-size: 18px;
                 border-radius: 10px;
-                box-shadow: none;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             """)
-            button.setIcon(QIcon(str(self.path_icons["home_white"])))  # Ícone original (ou ícone padrão)
+
+        # Atualiza o ícone (por exemplo)
+        button.setIcon(QIcon(str(self.path_icons[name_icon])))
+
+    def reset_buttons_style(self, index: int):
+        """Reseta o estilo de todos os botões."""
+        for btn in [self.btn_dashboard, self.btn_report]:
+            btn.setStyleSheet("""
+                   background-color: transparent;
+                   color: #000000;
+                   font-size: 18px;
+                   border-radius: 10px;
+                   box-shadow: none;
+               """)
+
 
     def toggle_sidebar(self):
         """Expande ou recolhe a sidebar com animação."""
