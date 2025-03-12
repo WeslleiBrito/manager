@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5cf0f62f-a709-4525-9c86-e86c4bf4a7fe" name="Changes" comment="Estilização 90%">
-      <change afterPath="$PROJECT_DIR$/interfaces/dashboard/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/filters/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/graphics/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/lists/__init__.py" afterDir="false" />
+    <list default="true" id="5cf0f62f-a709-4525-9c86-e86c4bf4a7fe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/icons/home-black.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/home-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/menu-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/menu.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interfaces/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/home/home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/login/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/login/login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
     &quot;Python.login.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+    &quot;git-widget-placeholder&quot;: &quot;dashboard&quot;
   }
 }</component>
   <component name="RunManager" selected="Python.home">

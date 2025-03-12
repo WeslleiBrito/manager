@@ -112,6 +112,7 @@ class Login(QWidget):
         # Carregando a imagem da logo
         logo_path = path_local / "../../src/logo.png"
 
+
         if not logo_path.exists():
             print(f"Erro: A imagem {logo_path} não foi encontrada.")
             sys.exit(1)
