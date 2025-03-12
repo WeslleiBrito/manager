@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cf0f62f-a709-4525-9c86-e86c4bf4a7fe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/icons/home-black.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/home-white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/menu-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/icons/menu.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interfaces/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/home/home.py" afterDir="false" />
