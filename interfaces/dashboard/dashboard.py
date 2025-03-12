@@ -2,9 +2,7 @@ from PySide6.QtWidgets import  QWidget, QVBoxLayout, QHBoxLayout, QPushButton, Q
        QTableWidget, QTableWidgetItem
 from PySide6.QtCharts import QChartView, QLineSeries, QChart
 from PySide6.QtGui import QPainter
-
 import random
-
 
 class Dashboard(QWidget):
     def __init__(self):
