@@ -1,8 +1,51 @@
-from PySide6.QtWidgets import  QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel,  QComboBox, \
+from PySide6.QtCore import QSize
+from PySide6.QtWidgets import  QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel,  QComboBox, \
        QTableWidget, QTableWidgetItem
 from PySide6.QtCharts import QChartView, QLineSeries, QChart
-from PySide6.QtGui import QPainter
+from PySide6.QtGui import QPainter, QIcon, QPixmap
+from typing import List, TypedDict
 import random
+from pathlib import Path
+import sys
+
+path_local = Path(__file__).parent
+
+
+class ComponentsItemMenu(TypedDict):
+    pathIcon: str
+    legend: str
+    value: float
+
+
+class ItemMenu(QWidget):
+    def __init__(self, list_itens: List[ComponentsItemMenu]):
+        super().__init__()
+
+        self.main_layout = QHBoxLayout()
+
+
+        for item in list_itens:
+
+            component_layout = QHBoxLayout()
+            layout_value = QVBoxLayout()
+
+            icon = QPixmap(item["pathIcon"]).scaled(QSize(40, 40))
+            legend = QLabel(item["legend"])
+            value = QLabel(str(item["value"]))
+
+            label_icon = QLabel()
+            label_icon.setPixmap(icon)
+
+            layout_value.addWidget(legend)
+            layout_value.addWidget(value)
+
+            component_layout.addWidget(label_icon)
+            component_layout.addLayout(layout_value)
+
+            self.main_layout.addLayout(component_layout)
+
+
+        self.setLayout(self.main_layout)
 
 class Dashboard(QWidget):
     def __init__(self):
@@ -87,3 +130,18 @@ class Dashboard(QWidget):
     def apply_filter(self):
         """Aplica o filtro selecionado"""
         print("Filtro aplicado (exemplo: período de vendas)")
+
+
+
+items = [
+    {"pathIcon": str(path_local / "../../src/icons/dashboard/invoicing.png"), "legend": "Faturamento", "value": 183039.51},
+    {"pathIcon": str(path_local / "../../src/icons/dashboard/cost.png"), "legend": "Custo", "value": 92231.77},
+]
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    menu = ItemMenu(items)
+    menu.show()
+
+    sys.exit(app.exec())

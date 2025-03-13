@@ -15,12 +15,12 @@ class Home(QWidget):
         self.current_button = None
 
         relative_paths_icons = [
-            "../../src/icons/home-white.png",
-            "../../src/icons/home-black.svg",
-            "../../src/icons/menu.png",
-            "../../src/icons/menu-2.png",
-            "../../src/icons/report_black.png",
-            "../../src/icons/report_white.png",
+            "../../src/icons/home/home-white.png",
+            "../../src/icons/home/home-black.svg",
+            "../../src/icons/home/menu.png",
+            "../../src/icons/home/menu-2.png",
+            "../../src/icons/home/report_black.png",
+            "../../src/icons/home/report_white.png",
         ]
 
         self.path_icons = {}
@@ -210,7 +210,8 @@ class Home(QWidget):
 
 
 if __name__ == "__main__":
-    app = QApplication([])
+    app = QApplication(sys.argv)
     window = Home()
     window.show()
-    app.exec()
+    sys.exit(app.exec())
+
