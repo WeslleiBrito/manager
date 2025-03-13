@@ -12,6 +12,7 @@ class Home(QWidget):
     def __init__(self):
         super().__init__()
         path_local = Path(__file__).parent
+        self.current_button = None
 
         relative_paths_icons = [
             "../../src/icons/home-white.png",
@@ -121,6 +122,13 @@ class Home(QWidget):
         self.animation.setDuration(300)
         self.animation.setEasingCurve(QEasingCurve.Type.InOutQuad)
 
+        self.buttons = [
+            (self.btn_dashboard, "home_white", "home_black"),
+            (self.btn_report, "report_white", "report_black"),
+        ]
+
+        self.switch_page(0)
+
     @staticmethod
     def create_dashboard_page():
         """Cria a página do Dashboard."""
@@ -147,44 +155,43 @@ class Home(QWidget):
 
     def switch_page(self, index):
         """Alterna entre as páginas no QStackedWidget."""
+
+        # Obtém o botão e os ícones correspondentes ao índice
+        new_button, new_icon_selected, new_icon_unselected = self.buttons[index]
+
+        # Se houver um botão selecionado anteriormente, restaura seu estilo e ícone original
+        if self.current_button:
+            for btn, _, icon_unselected in self.buttons:
+                if btn == self.current_button:
+                    self.reset_button_style(self.current_button, icon_unselected)
+                    break
+
+        # Aplica o estilo e ícone ao novo botão
+        self.update_button_style(new_button, new_icon_selected)
+        self.current_button = new_button  # Atualiza o botão selecionado
         self.pages.setCurrentIndex(index)
 
-        # Reseta o estilo de todos os botões
-        self.reset_buttons_style(index)
-
-        # Aplica o estilo ao botão selecionado
-        if index == 0:
-            self.update_button_style(self.btn_dashboard, "home_black")
-            self.btn_report.setIcon(QIcon(str(self.path_icons["report_white"])))
-        elif index == 1:
-            self.update_button_style(self.btn_report, "report_black")
-            self.btn_dashboard.setIcon(QIcon(str(self.path_icons["home_white"])))
-
-
     def update_button_style(self, button, name_icon: str):
-        """Atualiza o estilo do botão clicado."""
+        """Aplica o estilo ao botão selecionado."""
         button.setIcon(QIcon(str(self.path_icons[name_icon])))
         button.setStyleSheet("""
-                background-color: #41AEF2;
-                color: #FFFFFF;
-                font-size: 18px;
-                border-radius: 10px;
-                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            """)
+            background-color: #41AEF2;
+            color: #FFFFFF;
+            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        """)
 
-        # Atualiza o ícone (por exemplo)
-        button.setIcon(QIcon(str(self.path_icons[name_icon])))
-
-    def reset_buttons_style(self, index: int):
-        """Reseta o estilo de todos os botões."""
-        for btn in [self.btn_dashboard, self.btn_report]:
-            btn.setStyleSheet("""
-                   background-color: transparent;
-                   color: #000000;
-                   font-size: 18px;
-                   border-radius: 10px;
-                   box-shadow: none;
-               """)
+    def reset_button_style(self, button, icon_name):
+        """Restaura o estilo padrão e ícone do botão."""
+        button.setIcon(QIcon(str(self.path_icons[icon_name])))
+        button.setStyleSheet("""
+            background-color: transparent;
+            color: #000000;
+            font-size: 18px;
+            border-radius: 10px;
+            box-shadow: none;
+        """)
 
 
     def toggle_sidebar(self):
