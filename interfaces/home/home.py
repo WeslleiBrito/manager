@@ -11,6 +11,8 @@ import sys
 class Home(QWidget):
     def __init__(self):
         super().__init__()
+        self.showMaximized()
+
         path_local = Path(__file__).parent
         self.current_button = None
 
@@ -46,7 +48,7 @@ class Home(QWidget):
 
         self.name_icon_current = "home_white"
 
-        self.showMaximized()
+
         self.expanded = True
         self.width_expanded = 200
         self.width_collapsed = 60
@@ -106,7 +108,8 @@ class Home(QWidget):
 
         # Criando as páginas no QStackedWidget
         self.pages = QStackedWidget()
-        self.pages.addWidget(Dashboard())  # Página do Dashboard
+        self.page_dashboard = Dashboard()
+        self.pages.addWidget(self.page_dashboard)  # Página do Dashboard
         self.pages.addWidget(self.create_graficos_page())  # Página de Gráficos
         self.pages.addWidget(self.create_lista_page())  # Página de Lista
 
@@ -212,6 +215,6 @@ class Home(QWidget):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = Home()
-    window.show()
+    window.showMaximized()
     sys.exit(app.exec())
 

@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cf0f62f-a709-4525-9c86-e86c4bf4a7fe" name="Changes" comment="Estilização 90%">
+      <change afterPath="$PROJECT_DIR$/components/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/panel/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/panel/panel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interfaces/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/home/home.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/home-black.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/home/home-black.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/home-white.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/home/home-white.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/menu-2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/home/menu-2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/menu.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/home/menu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/report_black.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/home/report_black.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/icons/report_white.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/icons/home/report_white.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/icons/dashboard/cost.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/icons/dashboard/invoicing.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,16 +52,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.dashboard.executor&quot;: &quot;Run&quot;,
-    &quot;Python.home.executor&quot;: &quot;Run&quot;,
-    &quot;Python.login.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dashboard&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.dashboard.executor": "Run",
+    "Python.home.executor": "Run",
+    "Python.login.executor": "Run",
+    "Python.panel.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dashboard"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\wesll\PycharmProjects\Manager\src\icons\home" />
@@ -136,9 +136,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="panel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Manager" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/components/panel" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/components/panel/panel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.home" />
+        <item itemvalue="Python.panel" />
         <item itemvalue="Python.dashboard" />
         <item itemvalue="Python.login" />
       </list>
