@@ -1,8 +1,12 @@
+from datetime import datetime
+from turtledemo.clock import current_day
 
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox, \
-    QTableWidget, QTableWidgetItem, QSpacerItem, QSizePolicy
+    QTableWidget, QTableWidgetItem, QSpacerItem, QSizePolicy, QDateEdit
 from PySide6.QtCharts import QChartView, QLineSeries, QChart
 from PySide6.QtGui import QPainter
+from PySide6.QtCore import QDate, Qt
+
 import random
 from pathlib import Path
 import sys
@@ -11,14 +15,42 @@ from components.panel.panel import Panel
 
 path_local = Path(__file__).parent
 
+class CustomizedDateEdit(QWidget):
+    def __init__(self, legend: str, default_date: QDate = QDate.currentDate(),
+                 with_calendar: bool = True, display_format: str = "dd/MM/yyyy",
+                 min_date: QDate = None, max_date: QDate = None, maximum_width: int = 90):
+        super().__init__()
+
+        self.date = QDateEdit(self)
+
+        if min_date:
+            self.date.setMinimumDate(min_date)
+
+        if max_date:
+            self.date.setMaximumDate(max_date)
+
+        self.legend = QLabel(legend)
+
+        self.date.setDate(default_date)
+        self.date.setDisplayFormat(display_format)
+        self.date.setCalendarPopup(with_calendar)
+        self.date.setMaximumWidth(maximum_width)
+
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.legend)
+        self.layout.addWidget(self.date)
+
+        self.setLayout(self.layout)
+
+
 
 class Dashboard(QWidget):
     def __init__(self):
         super().__init__()
 
         self.sidebar_spacer = QSpacerItem(0, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-
+        self.initial_date = CustomizedDateEdit("Data início")
+        self.final_date = CustomizedDateEdit("Data fim")
 
         items = [
             {"pathIcon": str(path_local / "../../src/icons/dashboard/invoicing.svg"), "legend": "Faturamento",
@@ -34,9 +66,12 @@ class Dashboard(QWidget):
         # Layout principal
         layout = QVBoxLayout(self)
 
+
         # Adicionando filtros
         filter_layout = self.create_filters()
+        layout.addItem(QSpacerItem(0, 50, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
         layout.addLayout(filter_layout)
+
 
         # Adicionando o gráfico
         #sales_chart = self.create_sales_chart()
@@ -58,18 +93,19 @@ class Dashboard(QWidget):
 
     def create_filters(self):
         """Cria filtros para o dashboard"""
-        layout = QHBoxLayout()
+        layout = QVBoxLayout()
+        layout_date = QVBoxLayout()
+        layout_date_items = QHBoxLayout()
+
 
         period_label = QLabel("Período:")
-        period_combo = QComboBox()
-        period_combo.addItems(["Mês", "Trimestre", "Ano"])
+        layout_date.addWidget(period_label)
+        layout_date_items.addWidget(self.initial_date)
+        layout_date_items.addWidget(self.final_date)
 
-        filter_button = QPushButton("Aplicar Filtro")
-        filter_button.clicked.connect(self.apply_filter)
+        layout_date.addLayout(layout_date_items)
 
-        layout.addWidget(period_label)
-        layout.addWidget(period_combo)
-        layout.addWidget(filter_button)
+        layout.addLayout(layout_date)
 
         return layout
 

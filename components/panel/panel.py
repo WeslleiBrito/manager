@@ -1,6 +1,6 @@
 from typing import List, TypedDict
 import sys
-from PySide6.QtCore import QSize, Qt, QMargins, QByteArray
+from PySide6.QtCore import QSize, Qt, QByteArray
 
 from PySide6.QtWidgets import QWidget, QHBoxLayout, QVBoxLayout, QLabel, QApplication
 from pathlib import Path
@@ -58,7 +58,6 @@ class Panel(QWidget):
 
             icon = QSvgWidget(item["pathIcon"])
             icon.setFixedSize(QSize(40, 40))
-            #svg_icon = load_svg_with_color(item["pathIcon"], "#FFFFFF")
 
             #icon.load(svg_icon)
             legend = QLabel(item["legend"])

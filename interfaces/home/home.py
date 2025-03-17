@@ -75,9 +75,9 @@ class Home(QWidget):
         # Botão de alternância
         self.toggle_button = QPushButton()
         self.toggle_button.setIcon(QIcon(str(self.path_icons["menu_2"])))
-        self.toggle_button.setIconSize(QSize(30, 30))
+        self.toggle_button.setIconSize(QSize(40, 40))
         self.toggle_button.setFixedSize(40, 40)
-        self.toggle_button.setStyleSheet("background-color: #41AEF2; color: #FFFFFF; font-size: 18px; border-radius: 10px;")
+        self.toggle_button.setStyleSheet("background-color: transparent; color: #FFFFFF; font-size: 18px; border-radius: 10px;")
         self.toggle_button.clicked.connect(self.toggle_sidebar)
 
         # Botões da Sidebar para alternar telas
@@ -98,6 +98,7 @@ class Home(QWidget):
         self.sidebar_layout = QVBoxLayout(self.sidebar)
         self.sidebar_layout.setContentsMargins(0, 40, 0, 0)
         self.sidebar_layout.addWidget(self.toggle_button, alignment=Qt.AlignmentFlag.AlignCenter)
+        self.sidebar_layout.addItem(QSpacerItem(0, 70, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
         self.sidebar_layout.addWidget(self.btn_dashboard, alignment=Qt.AlignmentFlag.AlignCenter)
         self.sidebar_layout.addWidget(self.btn_report, alignment=Qt.AlignmentFlag.AlignCenter)
         self.sidebar_layout.addStretch()
