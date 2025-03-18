@@ -1,47 +1,17 @@
-from datetime import datetime
-from turtledemo.clock import current_day
 
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox, \
-    QTableWidget, QTableWidgetItem, QSpacerItem, QSizePolicy, QDateEdit
+    QTableWidget, QTableWidgetItem, QSpacerItem, QSizePolicy
 from PySide6.QtCharts import QChartView, QLineSeries, QChart
 from PySide6.QtGui import QPainter
-from PySide6.QtCore import QDate, Qt
+from PySide6.QtCore import Qt, QSize
 
 import random
 from pathlib import Path
 import sys
 from components.panel.panel import Panel
-
+from components.panel.customDate import CustomDate
 
 path_local = Path(__file__).parent
-
-class CustomizedDateEdit(QWidget):
-    def __init__(self, legend: str, default_date: QDate = QDate.currentDate(),
-                 with_calendar: bool = True, display_format: str = "dd/MM/yyyy",
-                 min_date: QDate = None, max_date: QDate = None, maximum_width: int = 90):
-        super().__init__()
-
-        self.date = QDateEdit(self)
-
-        if min_date:
-            self.date.setMinimumDate(min_date)
-
-        if max_date:
-            self.date.setMaximumDate(max_date)
-
-        self.legend = QLabel(legend)
-
-        self.date.setDate(default_date)
-        self.date.setDisplayFormat(display_format)
-        self.date.setCalendarPopup(with_calendar)
-        self.date.setMaximumWidth(maximum_width)
-
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.legend)
-        self.layout.addWidget(self.date)
-
-        self.setLayout(self.layout)
-
 
 
 class Dashboard(QWidget):
@@ -49,8 +19,8 @@ class Dashboard(QWidget):
         super().__init__()
 
         self.sidebar_spacer = QSpacerItem(0, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-        self.initial_date = CustomizedDateEdit("Data início")
-        self.final_date = CustomizedDateEdit("Data fim")
+        self.initial_date = CustomDate("Data início")
+        self.final_date = CustomDate("Data fim")
 
         items = [
             {"pathIcon": str(path_local / "../../src/icons/dashboard/invoicing.svg"), "legend": "Faturamento",
@@ -72,11 +42,6 @@ class Dashboard(QWidget):
         layout.addItem(QSpacerItem(0, 50, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
         layout.addLayout(filter_layout)
 
-
-        # Adicionando o gráfico
-        #sales_chart = self.create_sales_chart()
-        #layout.addWidget(sales_chart)
-
         # Adicionando o painel de resumo
         layout.addItem(self.sidebar_spacer)
         panel_resume = Panel(items)
@@ -94,23 +59,25 @@ class Dashboard(QWidget):
     def create_filters(self):
         """Cria filtros para o dashboard"""
         layout = QVBoxLayout()
-        layout_date = QVBoxLayout()
-        layout_date_items = QHBoxLayout()
+        layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        layout_date = QHBoxLayout()
+        layout_date.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
+        button_update = QPushButton("Atualizar")
 
-
+        button_update.setMaximumWidth(90)
         period_label = QLabel("Período:")
-        layout_date.addWidget(period_label)
-        layout_date_items.addWidget(self.initial_date)
-        layout_date_items.addWidget(self.final_date)
-
-        layout_date.addLayout(layout_date_items)
+        layout.addWidget(period_label)
+        layout_date.addWidget(self.initial_date)
+        layout_date.addWidget(self.final_date)
 
         layout.addLayout(layout_date)
+        layout.addWidget(button_update, alignment=Qt.AlignmentFlag.AlignCenter)
 
         return layout
 
     def create_sales_chart(self):
         """Cria o gráfico de vendas"""
+
         series = QLineSeries()
         for i in range(10):
             series.append(i, random.randint(50, 100))
