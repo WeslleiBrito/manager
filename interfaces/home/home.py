@@ -1,6 +1,7 @@
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QColor
 from PySide6.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QPushButton, QFrame, QLabel, QHBoxLayout, QSizePolicy, QSpacerItem, QStackedWidget
+    QApplication, QWidget, QVBoxLayout, QPushButton, QFrame, QLabel, QHBoxLayout, QSizePolicy, QSpacerItem,
+    QStackedWidget, QGraphicsDropShadowEffect
 )
 from PySide6.QtCore import QPropertyAnimation, QEasingCurve, Qt, QByteArray, QSize
 from interfaces.dashboard.dashboard import Dashboard
@@ -132,6 +133,27 @@ class Home(QWidget):
         ]
 
         self.switch_page(0)
+
+    def update_button_style(self, button, name_icon: str=None):
+        """Aplica o estilo ao botão selecionado e adiciona um efeito de sombra."""
+        if name_icon:
+            button.setIcon(QIcon(str(self.path_icons[name_icon])))
+
+        button.setStyleSheet("""
+            background-color: #41AEF2;
+            color: #FFFFFF;
+            font-size: 18px;
+            border-radius: 10px;
+        """)
+
+        # Criar efeito de sombra
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setBlurRadius(15)  # Intensidade do desfoque
+        shadow.setXOffset(3)  # Deslocamento horizontal
+        shadow.setYOffset(3)  # Deslocamento vertical
+        shadow.setColor(QColor.black)  # Cor da sombra
+
+        button.setGraphicsEffect(shadow)  # Aplicar efeito
 
     @staticmethod
     def create_dashboard_page():

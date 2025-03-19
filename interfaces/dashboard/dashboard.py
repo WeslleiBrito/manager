@@ -1,10 +1,9 @@
 
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, QComboBox, \
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, \
     QTableWidget, QTableWidgetItem, QSpacerItem, QSizePolicy
 from PySide6.QtCharts import QChartView, QLineSeries, QChart
-from PySide6.QtGui import QPainter
-from PySide6.QtCore import Qt, QSize
-
+from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtCore import Qt
 import random
 from pathlib import Path
 import sys
@@ -29,7 +28,7 @@ class Dashboard(QWidget):
             {"pathIcon": str(path_local / "../../src/icons/dashboard/fixed-expenses.svg"), "legend": "Despesas Fixas", "value": 28325.11},
             {"pathIcon": str(path_local / "../../src/icons/dashboard/variable-expenses.svg"), "legend": "Despesas Variáveis", "value": 14136.01},
             {"pathIcon": str(path_local / "../../src/icons/dashboard/profit.svg"), "legend": "Lucro", "value": 9203.44},
-            {"pathIcon": str(path_local / "../../src/icons/dashboard/percent.svg"), "legend": "Porcentagem",
+            {"pathIcon": str(path_local / "../../src/icons/dashboard/percent.svg"), "legend": "Porcentagem", "unit": "%",
              "value": 10},
         ]
 
@@ -64,7 +63,8 @@ class Dashboard(QWidget):
         layout_date.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
         button_update = QPushButton("Atualizar")
 
-        button_update.setMaximumWidth(90)
+        self.update_button_style(button_update)
+
         period_label = QLabel("Período:")
         layout.addWidget(period_label)
         layout_date.addWidget(self.initial_date)

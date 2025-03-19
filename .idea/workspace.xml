@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5cf0f62f-a709-4525-9c86-e86c4bf4a7fe" name="Changes" comment="Estilização 90%">
-      <change afterPath="$PROJECT_DIR$/components/panel/customDate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/panel/panel.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/panel/panel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/dashboard/dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interfaces/home/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/interfaces/home/home.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
