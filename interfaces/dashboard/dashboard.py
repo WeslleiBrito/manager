@@ -2,7 +2,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, \
     QTableWidget, QTableWidgetItem, QSpacerItem, QSizePolicy
 from PySide6.QtCharts import QChartView, QLineSeries, QChart
-from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtGui import QPainter
 from PySide6.QtCore import Qt
 import random
 from pathlib import Path
@@ -62,8 +62,6 @@ class Dashboard(QWidget):
         layout_date = QHBoxLayout()
         layout_date.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignBottom)
         button_update = QPushButton("Atualizar")
-
-        self.update_button_style(button_update)
 
         period_label = QLabel("Período:")
         layout.addWidget(period_label)

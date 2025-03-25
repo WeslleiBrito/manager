@@ -33,16 +33,41 @@ class TItemPanel(TypedDict):
 
 
 class Panel(QWidget):
+    """
+        Classe que representa um painel de informações exibido em um formato gráfico.
+        Cada painel contém múltiplos componentes que mostram um ícone, um valor e uma legenda,
+        e possibilita a atualização desses valores dinamicamente.
+
+        A classe herda de `QWidget` e é composta por um layout principal contendo
+        vários widgets que representam os itens configurados na lista `list_itens`.
+
+        A cada item na lista, um painel com o ícone associado, legenda e valor é criado.
+        Esses valores podem ser atualizados posteriormente.
+
+        Parâmetros:
+        - list_itens (List[TItemPanel]): Lista de itens a serem exibidos no painel.
+          Cada item deve ser um dicionário contendo as chaves 'pathIcon' (caminho do ícone SVG),
+          'legend' (legenda a ser exibida), 'value' (valor a ser exibido), e opcionalmente 'unit' (unidade do valor).
+
+        Exemplo de uso:
+        - Para criar um painel com múltiplos itens:
+            panel = Panel([
+                {"pathIcon": "path_to_icon.svg", "legend": "Faturamento", "value": 183039.51},
+                {"pathIcon": "path_to_icon.svg", "legend": "Lucro", "value": 9203.44}
+            ])
+            panel.show()
+        """
+
     def __init__(self, list_itens: List[TItemPanel]):
         super().__init__()
-
+        self.list_items = list_itens
         self.main_layout = QHBoxLayout()
         self.showMaximized()
 
         # Dicionário para armazenar os labels dos valores
         self.value_labels = {}
 
-        for item in list_itens:
+        for item in self.list_items:
             path_icon = Path(item["pathIcon"])
 
             if not path_icon.exists():
@@ -70,7 +95,7 @@ class Panel(QWidget):
             """)
 
             value_label = QLabel()
-            self.update_value_label(value_label, item["value"], item.get("unit"))
+            self._update_value_label(value_label, item["value"], item.get("unit"))
 
             value_label.setStyleSheet("""
                 font-weight: 600;
@@ -90,7 +115,8 @@ class Panel(QWidget):
 
         self.setLayout(self.main_layout)
 
-    def update_value_label(self, label: QLabel, value: float, unit: str = None):
+    @staticmethod
+    def _update_value_label(label: QLabel, value: float, unit: str = None):
         """Atualiza o texto de um QLabel com o novo valor formatado."""
         value_formatted = format_value(value)
         if unit:
@@ -98,13 +124,43 @@ class Panel(QWidget):
         else:
             label.setText(f"R$ {value_formatted}")
 
-    def update_value(self, legend: str, new_value: float):
-        """Atualiza o valor de um item no painel."""
-        if legend in self.value_labels:
-            self.update_value_label(self.value_labels[legend], new_value)
+    def _update_item(self, legend: str, new_value: float):
+        """Atualiza um único item no painel e reflete a mudança na interface gráfica."""
+        # Encontra o item na lista de itens
+        for item in self.list_items:
+            if item["legend"] == legend:
+                item["value"] = new_value  # Atualiza a lista de itens
+                unit = item.get("unit")  # Recupera a unidade, se existir
+                # Atualiza o QLabel da interface gráfica, passando a unidade correta
+                self._update_value_label(self.value_labels[legend], new_value, unit)
+                break
         else:
             print(f"Legenda '{legend}' não encontrada no painel.")
 
+    def update_value(self, updates: dict[str, float] | str, new_value: float):
+        """
+            Atualiza um ou múltiplos valores no painel com base na legenda ou no dicionário de atualizações.
+
+            Parâmetros:
+            - updates: Pode ser uma string representando uma legenda para atualização de um único valor ou um dicionário
+                       onde as chaves são as legendas e os valores são os novos valores a serem atribuídos.
+            - new_value: Valor a ser atribuído. Obrigatório se 'updates' for uma string.
+
+            Exemplo de uso:
+            - Atualizar um único valor:
+                panel.update_value_or_values("Faturamento", 250000.00)
+            - Atualizar múltiplos valores:
+                panel.update_value_or_values({
+                    "Faturamento": 250000.00,
+                    "Lucro": 18000.00,
+                    "Porcentagem": 15
+                })
+        """
+        if isinstance(updates, dict):  # Atualiza múltiplos valores
+            for legend, new_value in updates.items():
+                self._update_item(legend, new_value)
+        elif isinstance(updates, str):  # Atualiza um único valor
+            self._update_item(updates, new_value)
 
 
 
