@@ -75,6 +75,7 @@ class Panel(QWidget):
                 sys.exit(1)
 
             component_widget = QWidget()
+            component_widget.setMaximumHeight(70)
             component_widget.setStyleSheet("""
                 background-color: #D9D9D9;
                 color: #000000;
