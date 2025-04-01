@@ -1,7 +1,7 @@
 from PySide6.QtGui import QIcon, QColor
 from PySide6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QPushButton, QFrame, QLabel, QHBoxLayout, QSizePolicy, QSpacerItem,
-    QStackedWidget, QGraphicsDropShadowEffect
+    QStackedWidget
 )
 from PySide6.QtCore import QPropertyAnimation, QEasingCurve, Qt, QByteArray, QSize
 from interfaces.dashboard.dashboard import Dashboard
@@ -48,7 +48,6 @@ class Home(QWidget):
             self.path_icons["".join(key_name)] = path_local / path
 
         self.name_icon_current = "home_white"
-
 
         self.expanded = True
         self.width_expanded = 200
@@ -134,26 +133,6 @@ class Home(QWidget):
 
         self.switch_page(0)
 
-    def update_button_style(self, button, name_icon: str=None):
-        """Aplica o estilo ao botão selecionado e adiciona um efeito de sombra."""
-        if name_icon:
-            button.setIcon(QIcon(str(self.path_icons[name_icon])))
-
-        button.setStyleSheet("""
-            background-color: #41AEF2;
-            color: #FFFFFF;
-            font-size: 18px;
-            border-radius: 10px;
-        """)
-
-        # Criar efeito de sombra
-        shadow = QGraphicsDropShadowEffect()
-        shadow.setBlurRadius(15)  # Intensidade do desfoque
-        shadow.setXOffset(3)  # Deslocamento horizontal
-        shadow.setYOffset(3)  # Deslocamento vertical
-        shadow.setColor(QColor.black)  # Cor da sombra
-
-        button.setGraphicsEffect(shadow)  # Aplicar efeito
 
     @staticmethod
     def create_dashboard_page():
@@ -218,7 +197,6 @@ class Home(QWidget):
             border-radius: 10px;
             box-shadow: none;
         """)
-
 
     def toggle_sidebar(self):
         """Expande ou recolhe a sidebar com animação."""

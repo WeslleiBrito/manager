@@ -113,7 +113,6 @@ class Panel(QWidget):
             component_layout.addLayout(layout_value)
 
             self.main_layout.addWidget(component_widget)
-
         self.setLayout(self.main_layout)
 
     @staticmethod

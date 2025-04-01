@@ -16,6 +16,8 @@ class Dashboard(QWidget):
         super().__init__()
 
         self.sidebar_spacer = QSpacerItem(0, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+        self.button_update_panel = QPushButton("Atualizar painel")
+        self.button_update_panel.clicked.connect(self.update_panel)
 
         items = [
             {"pathIcon": str(path_local / "../../src/icons/dashboard/invoicing.svg"), "legend": "Faturamento",
@@ -28,40 +30,48 @@ class Dashboard(QWidget):
              "value": 10},
         ]
 
-        itens: list[TDateComponent] = [{"legend": "Data inicial"}, {"legend": "Data final"}]
-        self.component_dates = CustomDate(itens)
-
+        items_date: list[TDateComponent] = [{"legend": "Data inicial"}, {"legend": "Data final"}]
+        self.component_dates = CustomDate(items_date)
         # Layout principal
         layout = QVBoxLayout(self)
-
         # Adicionando filtros
         filter_layout = self.create_filter_date()
-        layout.addItem(QSpacerItem(0, 50, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum))
         layout.addLayout(filter_layout)
 
         # Adicionando o painel de resumo
-        layout.addItem(self.sidebar_spacer)
-        panel_resume = Panel(items)
-        layout.addWidget(panel_resume)
-        layout.addItem(self.sidebar_spacer)
 
+        self.panel_resume = Panel(items)
+        layout_panel = QVBoxLayout(self.panel_resume)
+        layout.addLayout(layout_panel)
+        layout.addWidget(self.panel_resume)
+        layout.addWidget(self.button_update_panel)
+
+    def update_panel(self):
+        self.panel_resume.update_value("Faturamento", 50000)
 
     def create_filter_date(self):
         """Cria filtros para o dashboard"""
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
         layout_date = QHBoxLayout()
-        #button_update.clicked.connect(self.update_values)
 
         period_label = QLabel("Período:")
+        period_label.setMaximumHeight(20)
         layout.addWidget(period_label)
 
-        layout_date.addWidget(self.component_dates)
-        layout_button_vert = QVBoxLayout()
-        layout_button_vert.addItem(QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
+        widget_button = QWidget()
+        widget_button.setMaximumHeight(80)
+
+        vertical_layout_button = QVBoxLayout(widget_button)
+        vertical_spacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
         button_update = QPushButton("Atualizar")
-        layout_button_vert.addWidget(button_update)
-        layout_date.addLayout(layout_button_vert)
+
+        vertical_layout_button.addItem(vertical_spacer)
+        vertical_layout_button.addWidget(button_update)
+
+        layout_date.addWidget(self.component_dates)
+        layout_date.addWidget(widget_button)
+
 
         layout.addLayout(layout_date)
 
