@@ -112,7 +112,6 @@ class TableView(QWidget):
 
     def apply_theme(self, theme):
         """ Aplica a estilização da tabela """
-        print("Aplicando tema:", theme)  # Debug para conferir o que está sendo passado
 
         if "font" in theme:
             self.table.setFont(theme["font"])
